@@ -42,12 +42,45 @@ class App extends Component {
     this.state.operator ='plus';
   };
 
+  subtractValue =() =>{
+    this.state.previousNum = this.state.input;
+    this.setState({ input: ''});
+    this.state.operator ='subtract';
+  };
+  
+  multiplyValue =() =>{
+    this.state.previousNum = this.state.input;
+    this.setState({ input: ''});
+    this.state.operator ='multiply';
+  };
+  
+  divideValue =() =>{
+    this.state.previousNum = this.state.input;
+    this.setState({ input: ''});
+    this.state.operator ='divide';
+  };
+
   evaluate = () =>{
     this.state.currentNum = this.state.input;
 
     if(this.state.operator === 'plus'){
       this.setState({
         input: parseInt(this.state.previousNum) +
+        parseInt(this.state.currentNum)
+      });
+    } else if(this.state.operator === 'subtract'){
+      this.setState({
+        input: parseInt(this.state.previousNum) -
+        parseInt(this.state.currentNum)
+      });
+    } else if(this.state.operator === 'multiply'){
+      this.setState({
+        input: parseInt(this.state.previousNum) *
+        parseInt(this.state.previousNum)
+      });
+    } else if(this.state.operator === 'divide'){
+      this.setState({
+        input: parseInt(this.state.previousNum)/
         parseInt(this.state.currentNum)
       });
     }
@@ -64,13 +97,13 @@ class App extends Component {
             <Button handleClick= {this.addToInput}>7</Button>
             <Button handleClick= {this.addToInput}>8</Button>
             <Button handleClick= {this.addToInput}>9</Button>
-            <Button>/</Button>
+            <Button handleClick= {this.divideValue}>/</Button>
         </div>
         <div className='row'>
             <Button handleClick= {this.addToInput}>4</Button>
             <Button handleClick= {this.addToInput}>5</Button>
             <Button handleClick= {this.addToInput}>6</Button>
-            <Button>*</Button>
+            <Button handleClick= {this.multiplyValue}>*</Button>
           </div>
           <div className='row'>
             <Button handleClick= {this.addToInput}>1</Button>
@@ -82,7 +115,7 @@ class App extends Component {
             <Button handleClick= {this.addDecimal}>.</Button>
             <Button handleClick= {this.addZeroToInput}>0</Button>
             <Button handleClick= {this.evaluate}>=</Button>
-            <Button>-</Button>
+            <Button handleClick= {this.subtractValue}>-</Button>
           </div>
           <div className='row'>
             <ClearButton handleClear= {this.clearInput}>Clear</ClearButton>
